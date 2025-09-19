@@ -80,7 +80,7 @@ const sampleData = {
       age: 35,
       bloodGroup: "B+",
       phone: "+91-9876543210",
-      email: "rajesh@email.com",
+      email: "s123@gmail.com",
       lastVisit: "2024-12-15",
       condition: "Diabetes Type 2, Hypertension",
       status: "Regular Patient",
@@ -93,7 +93,7 @@ const sampleData = {
       age: 28,
       bloodGroup: "A+",
       phone: "+91-9876543211",
-      email: "priya@email.com",
+      email: "s123@gmail.com",
       lastVisit: "N/A",
       condition: "New Patient",
       status: "New Patient",
@@ -106,7 +106,7 @@ const sampleData = {
       age: 42,
       bloodGroup: "O+",
       phone: "+91-9876543212",
-      email: "vikash@email.com",
+      email: "s123@gmail.com",
       lastVisit: "2024-11-20",
       condition: "Hypertension",
       status: "Regular Patient",
@@ -187,8 +187,8 @@ const sampleData = {
       name: "Apollo Hospital",
       address: "Sector 26, Noida",
       phone: "+91-120-2588888",
-      email: "apollo@email.com",
-      password: "hospital123",
+      email: "s123@gmail.com",
+      password: "123456",
       totalDoctors: 45,
       totalBeds: 150,
       occupiedBeds: 120,
@@ -203,8 +203,8 @@ const sampleData = {
       name: "HealthPlus Pharmacy",
       address: "Main Market, Delhi",
       phone: "+91-11-12345678",
-      email: "healthplus@email.com",
-      password: "store123",
+      email: "s123@gmail.com",
+      password: "123456",
       verifiedPrescriptions: 156,
       monthlyCommission: 18000,
       medicinesInStock: 2450,
@@ -218,8 +218,8 @@ const sampleData = {
       name: "DiagnosticCenter Plus",
       address: "Medical Complex, Mumbai",
       phone: "+91-22-87654321",
-      email: "diagnostic@email.com",
-      password: "lab123",
+      email: "s123@gmail.com",
+      password: "123456",
       testsToday: 89,
       pendingResults: 156,
       avgTurnaround: 2.5,
@@ -233,8 +233,8 @@ const sampleData = {
       name: "City Blood Bank",
       address: "Central Hospital, Delhi",
       phone: "+91-11-55667788",
-      email: "bloodbank@email.com",
-      password: "blood123",
+      email: "s123@gmail.com",
+      password: "123456",
       totalUnits: 450,
       activeDonors: 1250,
       emergencyRequests: 8,
@@ -434,7 +434,7 @@ function handleLogin(e) {
   } else {
     console.log("Login failed");
     alert(
-      "Invalid credentials. Try:\nDoctor: amit.verma@apollo.com / doctor123\nPatient: rajesh@email.com / patient123\nHospital: apollo@email.com / hospital123"
+      "Invalid credentials. Try:\nDoctor: s123@gmail.com / 123456\nPatient: s123@gmail.com / 123456\nHospital: s123@gmail.com / 123456"
     );
   }
 }

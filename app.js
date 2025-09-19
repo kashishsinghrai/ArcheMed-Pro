@@ -8,25 +8,28 @@ let currentStoreTab = "overview";
 let currentLabTab = "overview";
 let currentBloodBankTab = "overview";
 
-// Sample Data with comprehensive medical platform data
+// Sample Data with a uniform data structure for all user types
 const sampleData = {
-  currentDoctor: {
-    id: "D001",
-    name: "Dr. Amit Verma",
-    specialization: "Cardiologist",
-    experience: "12 years",
-    hospital: "Apollo Hospital",
-    license: "MCI-12345-DL",
-    phone: "+91-9876543210",
-    email: "s123@gmail.com",
-    consultationFee: 500,
-    rating: 4.8,
-    totalPatients: 125,
-    monthlyEarnings: 45000,
-    totalCommission: 2400,
-    availableSlots: ["10:00 AM", "2:00 PM", "4:00 PM"],
-    password: "123456",
-  },
+  // Doctor data is now in an array for consistent lookup
+  doctors: [
+    {
+      id: "D001",
+      name: "Dr. Amit Verma",
+      specialization: "Cardiologist",
+      experience: "12 years",
+      hospital: "Apollo Hospital",
+      license: "MCI-12345-DL",
+      phone: "+91-9876543210",
+      email: "s123@gmail.com",
+      consultationFee: 500,
+      rating: 4.8,
+      totalPatients: 125,
+      monthlyEarnings: 45000,
+      totalCommission: 2400,
+      availableSlots: ["10:00 AM", "2:00 PM", "4:00 PM"],
+      password: "123456",
+    },
+  ],
 
   todayAppointments: [
     {
@@ -388,6 +391,7 @@ function handleLogin(e) {
 
   let user = null;
 
+  // Use a single, consistent lookup method for all user types
   switch (userType) {
     case "patient":
       user = sampleData.patients.find(

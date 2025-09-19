@@ -395,12 +395,9 @@ function handleLogin(e) {
       );
       break;
     case "doctor":
-      user = sampleData.currentDoctor;
-      if (user.email === email && user.password === password) {
-        // Valid doctor
-      } else {
-        user = null;
-      }
+      user = sampleData.doctors.find(
+        (d) => d.email === email && d.password === password
+      );
       break;
     case "hospital":
       user = sampleData.hospitals.find(
@@ -434,7 +431,7 @@ function handleLogin(e) {
   } else {
     console.log("Login failed");
     alert(
-      "Invalid credentials. Try:\nDoctor: s123@gmail.com / 123456\nPatient: s123@gmail.com / 123456\nHospital: s123@gmail.com / 123456"
+      "Invalid credentials. Please make sure you have selected the correct user type."
     );
   }
 }

@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedConnect Pro - Comprehensive Medical Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>🏥 ArcheMed Pro</h2>
+            </div>
+            <div class="nav-actions" id="navActions">
+                <button class="btn btn--primary" onclick="showLogin()">Login</button>
+                <button class="btn btn--outline" onclick="showRegister()">Register</button>
+            </div>
+            <div class="user-menu hidden" id="userMenu">
+                <span id="userName"></span>
+                <span id="userType"></span>
+                <button class="btn btn--sm btn--outline" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Landing Page -->
+    <div id="landingPage" class="landing-page">
+        <div class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Complete Medical Platform</h1>
+                    <p>Connect patients, doctors, hospitals, and medical services in one comprehensive platform with secure data sharing and reward system.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn--primary btn--lg" onclick="showRegister()">Get Started</button>
+                        <button class="btn btn--outline btn--lg" onclick="showLogin()">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">👨‍⚕️</div>
+                        <h3>For Doctors</h3>
+                        <p>Comprehensive dashboard with patient management, appointments, prescriptions, and commission tracking</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏥</div>
+                        <h3>For Hospitals</h3>
+                        <p>Complete hospital management with doctor coordination, patient flow, and resource management</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👤</div>
+                        <h3>For Patients</h3>
+                        <p>Secure health records, appointment booking, rewards system, and emergency access</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💊</div>
+                        <h3>For Medical Stores</h3>
+                        <p>Prescription verification, inventory management, and commission tracking system</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔬</div>
+                        <h3>For Laboratories</h3>
+                        <p>Lab test management, result reporting, and integration with healthcare providers</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🩸</div>
+                        <h3>For Blood Banks</h3>
+                        <p>Blood inventory management, donor coordination, and emergency blood requests</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal hidden" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login to MedConnect Pro</h3>
+                <button class="modal-close" onclick="closeModal('loginModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">User Type</label>
+                        <select class="form-control" id="loginUserType" required>
+                            <option value="">Select User Type</option>
+                            <option value="patient">Patient</option>
+                            <option value="doctor">Doctor</option>
+                            <option value="hospital">Hospital</option>
+                            <option value="medical_store">Medical Store</option>
+                            <option value="laboratory">Laboratory</option>
+                            <option value="blood_bank">Blood Bank</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email/Mobile</label>
+                        <input type="text" class="form-control" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal hidden" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Register on MedConnect Pro</h3>
+                <button class="modal-close" onclick="closeModal('registerModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label class="form-label">User Type</label>
+                        <select class="form-control" id="registerUserType" required onchange="showUserTypeFields()">
+                            <option value="">Select User Type</option>
+                            <option value="patient">Patient</option>
+                            <option value="doctor">Doctor</option>
+                            <option value="hospital">Hospital</option>
+                            <option value="medical_store">Medical Store</option>
+                            <option value="laboratory">Laboratory</option>
+                            <option value="blood_bank">Blood Bank</option>
+                        </select>
+                    </div>
+                    <div id="commonFields" class="hidden">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="registerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="registerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Mobile Number</label>
+                            <input type="tel" class="form-control" id="registerMobile" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOCTOR DASHBOARD -->
+    <div id="doctorDashboard" class="dashboard hidden">
+        <div class="dashboard-header">
+            <div class="welcome-section">
+                <h2>Welcome, <span id="doctorName">Dr. Amit Verma</span></h2>
+                <p><span id="doctorSpecialty">Cardiologist</span> • <span id="doctorExperience">12 years experience</span></p>
+            </div>
+            <div class="dashboard-nav">
+                <button class="nav-tab active" onclick="showDoctorTab('overview')">Overview</button>
+                <button class="nav-tab" onclick="showDoctorTab('patients')">Patients</button>
+                <button class="nav-tab" onclick="showDoctorTab('appointments')">Appointments</button>
+                <button class="nav-tab" onclick="showDoctorTab('prescriptions')">Prescriptions</button>
+                <button class="nav-tab" onclick="showDoctorTab('analytics')">Analytics</button>
+                <button class="nav-tab" onclick="showDoctorTab('earnings')">Earnings</button>
+            </div>
+        </div>
+        
+        <!-- Doctor Overview -->
+        <div id="doctorOverview" class="tab-content">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <h3 id="totalPatients">125</h3>
+                        <p>Total Patients</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-content">
+                        <h3 id="todayAppointments">3</h3>
+                        <p>Today's Appointments</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <h3 id="monthlyEarnings">₹45,000</h3>
+                        <p>Monthly Earnings</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-content">
+                        <h3 id="doctorRating">4.8</h3>
+                        <p>Rating</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Today's Schedule</h3>
+                <div id="todaySchedule" class="schedule-list">
+                    <!-- Today's appointments will be loaded here -->
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Medical Alerts</h3>
+                <div id="medicalAlerts" class="alerts-list">
+                    <!-- Medical alerts will be loaded here -->
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Pending Permission Requests</h3>
+                <div id="pendingPermissions" class="requests-list">
+                    <!-- Permission requests will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Doctor Patients -->
+        <div id="doctorPatients" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Patient Directory</h3>
+                <div class="search-section">
+                    <input type="text" class="form-control" id="patientSearch" placeholder="Search by name, ID, condition, or date">
+                    <select class="form-control" id="patientFilter">
+                        <option value="">All Patients</option>
+                        <option value="new">New Patients</option>
+                        <option value="returning">Returning Patients</option>
+                        <option value="referred">Referred Patients</option>
+                    </select>
+                    <button class="btn btn--primary" onclick="searchPatients()">Search</button>
+                </div>
+            </div>
+            
+            <div id="patientsDirectory" class="patients-grid">
+                <!-- Patient directory will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Doctor Appointments -->
+        <div id="doctorAppointments" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Appointment Management</h3>
+                <div class="appointment-filters">
+                    <select class="form-control" id="appointmentFilter">
+                        <option value="all">All Appointments</option>
+                        <option value="today">Today</option>
+                        <option value="upcoming">Upcoming</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <button class="btn btn--primary" onclick="showAvailabilitySettings()">Set Availability</button>
+                </div>
+            </div>
+            <div class="calendar-view">
+                <div class="calendar-header">
+                    <h4>Weekly Schedule</h4>
+                </div>
+                <div id="appointmentCalendar" class="calendar-grid">
+                    <!-- Calendar will be loaded here -->
+                </div>
+            </div>
+            <div id="doctorAppointmentsList" class="appointments-grid">
+                <!-- Appointments will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Doctor Prescriptions -->
+        <div id="doctorPrescriptions" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Prescription Management</h3>
+                <button class="btn btn--primary" onclick="showPrescriptionPad()">New Prescription</button>
+            </div>
+            
+            <div class="prescription-templates">
+                <h4>Quick Templates</h4>
+                <div id="prescriptionTemplates" class="templates-grid">
+                    <!-- Templates will be loaded here -->
+                </div>
+            </div>
+
+            <div class="recent-prescriptions">
+                <h4>Recent Prescriptions</h4>
+                <div id="recentPrescriptions" class="prescriptions-list">
+                    <!-- Recent prescriptions will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Doctor Analytics -->
+        <div id="doctorAnalytics" class="tab-content hidden">
+            <div class="analytics-grid">
+                <div class="chart-container">
+                    <h4>Monthly Consultations</h4>
+                    <div class="chart-placeholder" style="position: relative; height: 300px;">
+                        <canvas id="consultationsChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>Patient Demographics</h4>
+                    <div class="chart-placeholder" style="position: relative; height: 300px;">
+                        <canvas id="demographicsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="performance-metrics">
+                <h4>Performance Metrics</h4>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h5>Patient Satisfaction</h5>
+                        <div class="metric-value">96%</div>
+                    </div>
+                    <div class="metric-card">
+                        <h5>Treatment Success Rate</h5>
+                        <div class="metric-value">94%</div>
+                    </div>
+                    <div class="metric-card">
+                        <h5>Follow-up Rate</h5>
+                        <div class="metric-value">87%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Doctor Earnings -->
+        <div id="doctorEarnings" class="tab-content hidden">
+            <div class="earnings-summary">
+                <div class="earnings-card">
+                    <h4>Total Monthly Earnings</h4>
+                    <div class="earnings-amount">₹45,000</div>
+                </div>
+                <div class="earnings-breakdown">
+                    <div class="breakdown-item">
+                        <span>Consultation Fees</span>
+                        <span>₹22,500</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Commission from Prescriptions</span>
+                        <span>₹2,400</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Follow-up Consultations</span>
+                        <span>₹20,100</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commission-tracking">
+                <h4>Commission Tracking</h4>
+                <div id="commissionList" class="commission-list">
+                    <!-- Commission details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PATIENT DASHBOARD -->
+    <div id="patientDashboard" class="dashboard hidden">
+        <div class="dashboard-header">
+            <div class="welcome-section">
+                <h2>Hello, <span id="patientName">Rajesh Kumar</span></h2>
+                <p>Manage your health journey with ease</p>
+            </div>
+            <div class="dashboard-nav">
+                <button class="nav-tab active" onclick="showPatientTab('overview')">Overview</button>
+                <button class="nav-tab" onclick="showPatientTab('appointments')">Appointments</button>
+                <button class="nav-tab" onclick="showPatientTab('records')">Medical Records</button>
+                <button class="nav-tab" onclick="showPatientTab('rewards')">Rewards</button>
+                <button class="nav-tab" onclick="showPatientTab('emergency')">Emergency</button>
+            </div>
+        </div>
+        
+        <!-- Patient Overview -->
+        <div id="patientOverview" class="tab-content">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🏥</div>
+                    <div class="stat-content">
+                        <h3 id="patientAppointments">5</h3>
+                        <p>Total Appointments</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-content">
+                        <h3 id="rewardPoints">250</h3>
+                        <p>Reward Points</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <h3 id="cashbackEarned">₹180</h3>
+                        <p>Cashback Earned</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📋</div>
+                    <div class="stat-content">
+                        <h3 id="medicalRecords">8</h3>
+                        <p>Medical Records</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <button class="btn btn--primary" onclick="showBookAppointment()">Book Appointment</button>
+                    <button class="btn btn--outline" onclick="showPatientTab('records')">View Records</button>
+                    <button class="btn btn--outline" onclick="showEmergencyAccess()">Emergency Access</button>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Upcoming Appointments</h3>
+                <div id="upcomingAppointments" class="appointment-list">
+                    <!-- Appointments will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Patient Appointments -->
+        <div id="patientAppointments" class="tab-content hidden">
+            <div class="section-header">
+                <h3>My Appointments</h3>
+                <button class="btn btn--primary" onclick="showBookAppointment()">Book New Appointment</button>
+            </div>
+            <div id="appointmentsList" class="appointments-grid">
+                <!-- Appointments will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Patient Medical Records -->
+        <div id="patientRecords" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Medical Records</h3>
+                <button class="btn btn--primary" onclick="showUploadRecord()">Upload Record</button>
+            </div>
+            
+            <div class="records-section">
+                <h4>Access Requests</h4>
+                <div id="accessRequests" class="requests-list">
+                    <!-- Access requests will be loaded here -->
+                </div>
+            </div>
+            
+            <div class="records-section">
+                <h4>My Health Data</h4>
+                <div id="healthRecords" class="health-data">
+                    <!-- Health records will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Patient Rewards -->
+        <div id="patientRewards" class="tab-content hidden">
+            <div class="rewards-header">
+                <div class="reward-tier">
+                    <h3>Silver Tier</h3>
+                    <p>5% Cashback on all treatments</p>
+                </div>
+                <div class="reward-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <p>75 points to Gold Tier</p>
+                </div>
+            </div>
+            
+            <div class="rewards-grid">
+                <div class="reward-card">
+                    <h4>Available Points</h4>
+                    <p class="reward-value">250 Points</p>
+                    <button class="btn btn--outline">Redeem</button>
+                </div>
+                <div class="reward-card">
+                    <h4>Total Cashback</h4>
+                    <p class="reward-value">₹180</p>
+                    <button class="btn btn--outline">Withdraw</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patient Emergency -->
+        <div id="patientEmergency" class="tab-content hidden">
+            <div class="emergency-section">
+                <h3>🚨 Emergency Information</h3>
+                <div class="emergency-card">
+                    <h4>Personal Information</h4>
+                    <p><strong>Name:</strong> Rajesh Kumar</p>
+                    <p><strong>Blood Group:</strong> B+</p>
+                    <p><strong>Emergency Contact:</strong> Sunita Kumar (+91-9876543210)</p>
+                    <p><strong>Known Allergies:</strong> Penicillin</p>
+                    <p><strong>Current Medications:</strong> Metformin 500mg, Amlodipine 5mg</p>
+                </div>
+                
+                <div class="emergency-actions">
+                    <button class="btn btn--primary btn--lg" onclick="callEmergency()">🚑 Call Emergency Services</button>
+                    <button class="btn btn--outline btn--lg" onclick="shareEmergencyData()">📤 Share Emergency Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOSPITAL DASHBOARD -->
+    <div id="hospitalDashboard" class="dashboard hidden">
+        <div class="dashboard-header">
+            <div class="welcome-section">
+                <h2><span id="hospitalName">Apollo Hospital</span></h2>
+                <p>Complete Hospital Management System</p>
+            </div>
+            <div class="dashboard-nav">
+                <button class="nav-tab active" onclick="showHospitalTab('overview')">Overview</button>
+                <button class="nav-tab" onclick="showHospitalTab('doctors')">Doctors</button>
+                <button class="nav-tab" onclick="showHospitalTab('patients')">Patients</button>
+                <button class="nav-tab" onclick="showHospitalTab('resources')">Resources</button>
+                <button class="nav-tab" onclick="showHospitalTab('analytics')">Analytics</button>
+            </div>
+        </div>
+        
+        <!-- Hospital Overview -->
+        <div id="hospitalOverview" class="tab-content">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👨‍⚕️</div>
+                    <div class="stat-content">
+                        <h3>45</h3>
+                        <p>Total Doctors</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🛏️</div>
+                    <div class="stat-content">
+                        <h3>120/150</h3>
+                        <p>Occupied Beds</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🚑</div>
+                    <div class="stat-content">
+                        <h3>12</h3>
+                        <p>Emergency Cases</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <h3>₹8.5L</h3>
+                        <p>Monthly Revenue</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Today's Operations</h3>
+                <div class="operations-grid">
+                    <div class="operation-card">
+                        <h4>Scheduled Surgeries</h4>
+                        <div class="operation-count">8</div>
+                    </div>
+                    <div class="operation-card">
+                        <h4>OPD Appointments</h4>
+                        <div class="operation-count">156</div>
+                    </div>
+                    <div class="operation-card">
+                        <h4>Lab Tests</h4>
+                        <div class="operation-count">89</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hospital Doctors -->
+        <div id="hospitalDoctors" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Doctor Management</h3>
+                <button class="btn btn--primary" onclick="addNewDoctor()">Add New Doctor</button>
+            </div>
+            <div id="doctorsList" class="doctors-grid">
+                <!-- Doctors list will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Hospital Patients -->
+        <div id="hospitalPatients" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Patient Flow Management</h3>
+                <div class="patient-flow-stats">
+                    <div class="flow-stat">
+                        <span>Admissions Today</span>
+                        <span class="flow-number">15</span>
+                    </div>
+                    <div class="flow-stat">
+                        <span>Discharges Today</span>
+                        <span class="flow-number">12</span>
+                    </div>
+                </div>
+            </div>
+            <div id="hospitalPatientsList" class="patients-grid">
+                <!-- Hospital patients list will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Hospital Resources -->
+        <div id="hospitalResources" class="tab-content hidden">
+            <div class="resources-grid">
+                <div class="resource-section">
+                    <h4>Bed Management</h4>
+                    <div class="bed-status">
+                        <div class="bed-category">
+                            <span>General Beds</span>
+                            <span>45/60</span>
+                        </div>
+                        <div class="bed-category">
+                            <span>ICU Beds</span>
+                            <span>8/15</span>
+                        </div>
+                        <div class="bed-category">
+                            <span>Emergency Beds</span>
+                            <span>5/8</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-section">
+                    <h4>Equipment Status</h4>
+                    <div class="equipment-list">
+                        <div class="equipment-item">
+                            <span>MRI Machine</span>
+                            <span class="status--success">Operational</span>
+                        </div>
+                        <div class="equipment-item">
+                            <span>CT Scanner</span>
+                            <span class="status--warning">Maintenance</span>
+                        </div>
+                        <div class="equipment-item">
+                            <span>X-Ray Machine</span>
+                            <span class="status--success">Operational</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hospital Analytics -->
+        <div id="hospitalAnalytics" class="tab-content hidden">
+            <div class="analytics-grid">
+                <div class="chart-container">
+                    <h4>Monthly Patient Flow</h4>
+                    <div class="chart-placeholder" style="position: relative; height: 300px;">
+                        <canvas id="patientFlowChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>Revenue Analysis</h4>
+                    <div class="chart-placeholder" style="position: relative; height: 300px;">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MEDICAL STORE DASHBOARD -->
+    <div id="medicalStoreDashboard" class="dashboard hidden">
+        <div class="dashboard-header">
+            <div class="welcome-section">
+                <h2><span id="storeName">HealthPlus Pharmacy</span></h2>
+                <p>Prescription Verification & Inventory Management</p>
+            </div>
+            <div class="dashboard-nav">
+                <button class="nav-tab active" onclick="showStoreTab('overview')">Overview</button>
+                <button class="nav-tab" onclick="showStoreTab('prescriptions')">Prescriptions</button>
+                <button class="nav-tab" onclick="showStoreTab('inventory')">Inventory</button>
+                <button class="nav-tab" onclick="showStoreTab('sales')">Sales</button>
+                <button class="nav-tab" onclick="showStoreTab('commissions')">Commissions</button>
+            </div>
+        </div>
+        
+        <!-- Store Overview -->
+        <div id="storeOverview" class="tab-content">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📋</div>
+                    <div class="stat-content">
+                        <h3>156</h3>
+                        <p>Prescriptions Verified</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💊</div>
+                    <div class="stat-content">
+                        <h3>2,450</h3>
+                        <p>Medicines in Stock</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <h3>₹18,000</h3>
+                        <p>Monthly Commission</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-content">
+                        <h3>₹45,000</h3>
+                        <p>Monthly Sales</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Pending Verifications</h3>
+                <div id="pendingVerifications" class="verifications-list">
+                    <!-- Pending verifications will be loaded here -->
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Low Stock Alerts</h3>
+                <div id="lowStockAlerts" class="alerts-list">
+                    <!-- Low stock alerts will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Store Prescriptions -->
+        <div id="storePrescriptions" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Prescription Management</h3>
+                <div class="prescription-scanner">
+                    <button class="btn btn--primary" onclick="scanPrescription()">📷 Scan Prescription</button>
+                    <button class="btn btn--outline" onclick="verifyPrescription()">✓ Verify Prescription</button>
+                </div>
+            </div>
+            <div id="prescriptionsList" class="prescriptions-grid">
+                <!-- Prescriptions will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Store Inventory -->
+        <div id="storeInventory" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Inventory Management</h3>
+                <div class="inventory-actions">
+                    <button class="btn btn--primary" onclick="addMedicine()">Add Medicine</button>
+                    <button class="btn btn--outline" onclick="updateStock()">Update Stock</button>
+                </div>
+            </div>
+            <div id="inventoryList" class="inventory-grid">
+                <!-- Inventory will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Store Sales -->
+        <div id="storeSales" class="tab-content hidden">
+            <div class="sales-summary">
+                <div class="sales-card">
+                    <h4>Today's Sales</h4>
+                    <div class="sales-amount">₹2,150</div>
+                </div>
+                <div class="sales-card">
+                    <h4>Monthly Sales</h4>
+                    <div class="sales-amount">₹45,000</div>
+                </div>
+            </div>
+            <div id="salesList" class="sales-grid">
+                <!-- Sales data will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Store Commissions -->
+        <div id="storeCommissions" class="tab-content hidden">
+            <div class="commission-summary">
+                <div class="commission-card">
+                    <h4>Total Commission Earned</h4>
+                    <div class="commission-amount">₹18,000</div>
+                </div>
+            </div>
+            <div id="storeCommissionList" class="commission-list">
+                <!-- Commission details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- LABORATORY DASHBOARD -->
+    <div id="laboratoryDashboard" class="dashboard hidden">
+        <div class="dashboard-header">
+            <div class="welcome-section">
+                <h2><span id="labName">DiagnosticCenter Plus</span></h2>
+                <p>Lab Test Management & Result Reporting</p>
+            </div>
+            <div class="dashboard-nav">
+                <button class="nav-tab active" onclick="showLabTab('overview')">Overview</button>
+                <button class="nav-tab" onclick="showLabTab('tests')">Tests</button>
+                <button class="nav-tab" onclick="showLabTab('results')">Results</button>
+                <button class="nav-tab" onclick="showLabTab('equipment')">Equipment</button>
+                <button class="nav-tab" onclick="showLabTab('reports')">Reports</button>
+            </div>
+        </div>
+        
+        <!-- Lab Overview -->
+        <div id="labOverview" class="tab-content">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🧪</div>
+                    <div class="stat-content">
+                        <h3>89</h3>
+                        <p>Tests Today</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <h3>156</h3>
+                        <p>Results Pending</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-content">
+                        <h3>2.5hrs</h3>
+                        <p>Avg. Turnaround</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <h3>₹28,000</h3>
+                        <p>Monthly Revenue</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Today's Test Schedule</h3>
+                <div id="todayTests" class="tests-schedule">
+                    <!-- Today's tests will be loaded here -->
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Equipment Status</h3>
+                <div id="equipmentStatus" class="equipment-grid">
+                    <!-- Equipment status will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Lab Tests -->
+        <div id="labTests" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Test Management</h3>
+                <button class="btn btn--primary" onclick="scheduleTest()">Schedule New Test</button>
+            </div>
+            <div id="testsList" class="tests-grid">
+                <!-- Tests will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Lab Results -->
+        <div id="labResults" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Results Management</h3>
+                <div class="results-filters">
+                    <select class="form-control" id="resultsFilter">
+                        <option value="pending">Pending Results</option>
+                        <option value="completed">Completed Results</option>
+                        <option value="abnormal">Abnormal Results</option>
+                    </select>
+                    <button class="btn btn--primary" onclick="uploadResults()">Upload Results</button>
+                </div>
+            </div>
+            <div id="resultsList" class="results-grid">
+                <!-- Results will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Lab Equipment -->
+        <div id="labEquipment" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Equipment Management</h3>
+                <button class="btn btn--primary" onclick="scheduleMaintenace()">Schedule Maintenance</button>
+            </div>
+            <div id="equipmentList" class="equipment-grid">
+                <!-- Equipment list will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Lab Reports -->
+        <div id="labReports" class="tab-content hidden">
+            <div class="reports-grid">
+                <div class="chart-container">
+                    <h4>Monthly Test Volume</h4>
+                    <div class="chart-placeholder" style="position: relative; height: 300px;">
+                        <canvas id="testVolumeChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4>Test Types Distribution</h4>
+                    <div class="chart-placeholder" style="position: relative; height: 300px;">
+                        <canvas id="testTypesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLOOD BANK DASHBOARD -->
+    <div id="bloodBankDashboard" class="dashboard hidden">
+        <div class="dashboard-header">
+            <div class="welcome-section">
+                <h2><span id="bloodBankName">City Blood Bank</span></h2>
+                <p>Blood Inventory & Donor Management</p>
+            </div>
+            <div class="dashboard-nav">
+                <button class="nav-tab active" onclick="showBloodBankTab('overview')">Overview</button>
+                <button class="nav-tab" onclick="showBloodBankTab('inventory')">Inventory</button>
+                <button class="nav-tab" onclick="showBloodBankTab('donors')">Donors</button>
+                <button class="nav-tab" onclick="showBloodBankTab('requests')">Requests</button>
+                <button class="nav-tab" onclick="showBloodBankTab('campaigns')">Campaigns</button>
+            </div>
+        </div>
+        
+        <!-- Blood Bank Overview -->
+        <div id="bloodBankOverview" class="tab-content">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🩸</div>
+                    <div class="stat-content">
+                        <h3>450</h3>
+                        <p>Total Units</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <h3>1,250</h3>
+                        <p>Active Donors</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🚨</div>
+                    <div class="stat-content">
+                        <h3>8</h3>
+                        <p>Emergency Requests</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-content">
+                        <h3>25</h3>
+                        <p>Donations Today</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Blood Group Inventory</h3>
+                <div id="bloodInventory" class="blood-groups-grid">
+                    <!-- Blood inventory will be loaded here -->
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Emergency Requests</h3>
+                <div id="emergencyRequests" class="requests-list">
+                    <!-- Emergency requests will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Blood Bank Inventory -->
+        <div id="bloodBankInventory" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Blood Inventory Management</h3>
+                <div class="inventory-actions">
+                    <button class="btn btn--primary" onclick="addBloodUnit()">Add Blood Unit</button>
+                    <button class="btn btn--outline" onclick="updateExpiry()">Update Expiry</button>
+                </div>
+            </div>
+            <div id="bloodInventoryList" class="inventory-grid">
+                <!-- Blood inventory list will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Blood Bank Donors -->
+        <div id="bloodBankDonors" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Donor Management</h3>
+                <div class="donor-actions">
+                    <button class="btn btn--primary" onclick="registerDonor()">Register New Donor</button>
+                    <button class="btn btn--outline" onclick="sendDonorReminder()">Send Reminders</button>
+                </div>
+            </div>
+            <div id="donorsList" class="donors-grid">
+                <!-- Donors list will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Blood Bank Requests -->
+        <div id="bloodBankRequests" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Blood Requests</h3>
+                <button class="btn btn--primary" onclick="createBloodRequest()">Create New Request</button>
+            </div>
+            <div id="bloodRequestsList" class="requests-grid">
+                <!-- Blood requests will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Blood Bank Campaigns -->
+        <div id="bloodBankCampaigns" class="tab-content hidden">
+            <div class="section-header">
+                <h3>Donation Campaigns</h3>
+                <button class="btn btn--primary" onclick="createCampaign()">Create Campaign</button>
+            </div>
+            <div id="campaignsList" class="campaigns-grid">
+                <!-- Campaigns will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Appointment Modal -->
+    <div class="modal hidden" id="bookAppointmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Book Appointment</h3>
+                <button class="modal-close" onclick="closeModal('bookAppointmentModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="bookAppointmentForm">
+                    <div class="form-group">
+                        <label class="form-label">Specialization</label>
+                        <select class="form-control" id="appointmentSpecialization" required>
+                            <option value="">Select Specialization</option>
+                            <option value="Cardiologist">Cardiologist</option>
+                            <option value="General Physician">General Physician</option>
+                            <option value="Neurologist">Neurologist</option>
+                            <option value="Orthopedist">Orthopedist</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Doctor</label>
+                        <select class="form-control" id="appointmentDoctor" required>
+                            <option value="">Select Doctor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-control" id="appointmentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Time Slot</label>
+                        <select class="form-control" id="appointmentTime" required>
+                            <option value="">Select Time Slot</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Book Appointment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Request Patient Data Modal -->
+    <div class="modal hidden" id="requestDataModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Request Patient Data Access</h3>
+                <button class="modal-close" onclick="closeModal('requestDataModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="patient-info">
+                    <h4 id="requestPatientName">Patient Name</h4>
+                    <p id="requestPatientId">Patient ID: P001</p>
+                </div>
+                <form id="requestDataForm">
+                    <div class="form-group">
+                        <label class="form-label">Reason for Access</label>
+                        <textarea class="form-control" id="accessReason" rows="3" required placeholder="Please provide reason for accessing patient's medical history"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Access Duration</label>
+                        <select class="form-control" id="accessDuration" required>
+                            <option value="24">24 Hours</option>
+                            <option value="72">72 Hours</option>
+                            <option value="168">1 Week</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Send Request</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

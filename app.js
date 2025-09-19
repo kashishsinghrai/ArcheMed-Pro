@@ -447,7 +447,47 @@ function handleRegistration(e) {
   const userType = document.getElementById("registerUserType").value;
   const name = document.getElementById("registerName").value;
   const email = document.getElementById("registerEmail").value;
+  const password = document.getElementById("registerPassword").value;
 
+  if (!name || !email || !password || !userType) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  const newUser = {
+    id: "U" + Date.now(), // Generate a unique ID
+    name: name,
+    email: email,
+    password: password,
+    // Add other user-specific data here
+  };
+
+  switch (userType) {
+    case "patient":
+      sampleData.patients.push(newUser);
+      break;
+    case "doctor":
+      // For a doctor, you might need more info like specialization
+      newUser.specialization = "General Practitioner";
+      newUser.experience = "1 year";
+      newUser.hospital = "N/A";
+      sampleData.doctors.push(newUser);
+      break;
+    case "hospital":
+      sampleData.hospitals.push(newUser);
+      break;
+    case "medical_store":
+      sampleData.medicalStores.push(newUser);
+      break;
+    case "laboratory":
+      sampleData.laboratories.push(newUser);
+      break;
+    case "blood_bank":
+      sampleData.bloodBanks.push(newUser);
+      break;
+  }
+
+  console.log("Registration successful, new user added:", newUser);
   alert(
     `Registration successful for ${name} as ${userType}!\nYou can now login with your credentials.`
   );
@@ -630,12 +670,12 @@ function loadDoctorDashboard() {
   const doctorNameEl = document.getElementById("doctorName");
   const doctorSpecialtyEl = document.getElementById("doctorSpecialty");
   const doctorExperienceEl = document.getElementById("doctorExperience");
+  const doctor = currentUser;
 
-  if (doctorNameEl) doctorNameEl.textContent = currentUser.name;
-  if (doctorSpecialtyEl)
-    doctorSpecialtyEl.textContent = currentUser.specialization;
+  if (doctorNameEl) doctorNameEl.textContent = doctor.name;
+  if (doctorSpecialtyEl) doctorSpecialtyEl.textContent = doctor.specialization;
   if (doctorExperienceEl)
-    doctorExperienceEl.textContent = `${currentUser.experience} experience`;
+    doctorExperienceEl.textContent = `${doctor.experience} experience`;
 
   // Update stats
   const totalPatientsEl = document.getElementById("totalPatients");
@@ -643,12 +683,12 @@ function loadDoctorDashboard() {
   const monthlyEarningsEl = document.getElementById("monthlyEarnings");
   const doctorRatingEl = document.getElementById("doctorRating");
 
-  if (totalPatientsEl) totalPatientsEl.textContent = currentUser.totalPatients;
+  if (totalPatientsEl) totalPatientsEl.textContent = doctor.totalPatients;
   if (todayAppointmentsEl)
     todayAppointmentsEl.textContent = sampleData.todayAppointments.length;
   if (monthlyEarningsEl)
-    monthlyEarningsEl.textContent = `₹${currentUser.monthlyEarnings.toLocaleString()}`;
-  if (doctorRatingEl) doctorRatingEl.textContent = currentUser.rating;
+    monthlyEarningsEl.textContent = `₹${doctor.monthlyEarnings.toLocaleString()}`;
+  if (doctorRatingEl) doctorRatingEl.textContent = doctor.rating;
 
   // Load today's schedule
   loadTodaySchedule();
@@ -941,15 +981,15 @@ function loadPatientDashboard() {
   const cashbackEarnedEl = document.getElementById("cashbackEarned");
   const patientAppointmentsEl = document.getElementById("patientAppointments");
   const medicalRecordsEl = document.getElementById("medicalRecords");
+  const patient = currentUser;
 
-  if (rewardPointsEl)
-    rewardPointsEl.textContent = currentUser.rewardPoints || "0";
+  if (rewardPointsEl) rewardPointsEl.textContent = patient.rewardPoints || "0";
   if (cashbackEarnedEl)
-    cashbackEarnedEl.textContent = `₹${currentUser.cashbackEarned}` || "₹0";
+    cashbackEarnedEl.textContent = `₹${patient.cashbackEarned}` || "₹0";
   if (patientAppointmentsEl)
-    patientAppointmentsEl.textContent = currentUser.totalAppointments || "0";
+    patientAppointmentsEl.textContent = patient.totalAppointments || "0";
   if (medicalRecordsEl)
-    medicalRecordsEl.textContent = currentUser.medicalRecords || "0";
+    medicalRecordsEl.textContent = patient.medicalRecords || "0";
 
   loadUpcomingAppointments();
 }
